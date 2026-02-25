@@ -1,0 +1,21 @@
+V1 = c(2,3,1,5,4,6,8,7,9)
+rownames = c("row1", "row2", "row3")
+colnames = c("col1", "col2", "col3")
+M <- matrix(V1, nrow = 3, byrow = TRUE, dimnames = list(rownames,colnames))
+print(M)
+N <- matrix(V1, nrow = 3, byrow = FALSE, dimnames = list(rownames,colnames))
+print(N)
+
+result1 <- M + N
+cat("Result of addition", "\n")
+print(result1)
+result2 <- M - N
+cat("Result of subtraction","\n")
+print(result2)
+result3 <- M * N
+cat("Result of multiplication","\n")
+print(result3)
+result4 <- M / N
+cat("Result of division","\n")
+print(result4)
+
