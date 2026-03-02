@@ -1,0 +1,6 @@
+str1 <- readline(prompt = "Enter String 1: ")
+str2 <- readline(prompt = "Enter String 2: ")
+
+result <- tolower(str1) == tolower(str2)
+
+cat("This program compares 2 strings. Both inputs are similar:", result)
