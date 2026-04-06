@@ -1,0 +1,28 @@
+library(plotrix)
+
+titanic_cleaned <- read.csv("C:/Users/User/Downloads/titanic_cleaned.csv")
+
+View(titanic_cleaned)
+
+boxplot(mpg ~ cyl, data = mtcars,
+        xlab = "Male",
+        ylab = "Female",
+        main = "Gender Survival Rate",
+        notch = TRUE,
+        varwidth = TRUE, 
+        col = c("green","yellow","purple"),
+        names = c("High","Medium","Low")
+)
+
+boxplot(Fare ~ Pclass,
+        data = titanic_cleaned,
+        main = "Fare Distribution by Passenger Class",
+        xlab = "Passenger Class",
+        ylab = "Fare",
+        col = "lightblue")
+
+hist(titanic_cleaned$Age,
+     main = "Age Distribution of Titanic Passengers",
+     xlab = "Age",
+     col = "lightgreen",
+     border = "black")
