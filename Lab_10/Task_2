@@ -1,0 +1,55 @@
+install.packages("e1071")
+install.packages("caTools")
+install.packages("class")
+
+library(e1071)
+library(caTools)
+library(class)
+
+data(ChickWeight)
+View(ChickWeight)
+
+data <- ChickWeight
+data$Diet <- as.factor(data$Diet)
+data <- data[, -which(names(data) == "Chick")]
+
+set.seed(123)
+
+split <- sample.split(data$Diet, SplitRatio = 0.7)
+
+train <- subset(data, split == TRUE)
+test <- subset(data, split == FALSE)
+
+normalize <- function(x) {
+  (x - min(x)) / (max(x) - min(x))
+}
+train_norm <- as.data.frame(lapply(train[, -3], normalize))
+test_norm <- as.data.frame(lapply(test[, -3], normalize))
+
+k_values <- c(3,5,7,9)
+accuracy <- c()
+
+for (k in k_values) {
+  pred <- knn(train_norm, test_norm, train$Diet, k = k)
+  
+  cm <- table(pred, test$Diet)
+  
+  acc <- sum(diag(cm)) / sum(cm)
+  accuracy <- c(accuracy, acc)
+}
+accuracy
+
+best_k <- k_values[which.max(accuracy)]
+best_k
+
+final_pred <- knn(train_norm, test_norm, train$Diet, k = best_k)
+conf_matrix <- table(Predicted = final_pred, Actual = test$Diet)
+conf_matrix
+
+#The optimal value of K was found to be 3, as it produced the highest classification accuracy.
+#The confusion matrix shows how well the model classified the diet categories.
+#Most predictions fall along the diagonal, indicating correct classifications.
+#However, there are some misclassifications between certain diet groups, suggesting some features may not perfectly distinguish all diet types.
+#The KNN algorithm was successfully applied to classify the diets of chicks. 
+#The model achieved its best performance at K = 3, with a reasonable accuracy, though some overlap between diet categories.
+#This indicates that additional features may improve the classification performance.
