@@ -1,0 +1,23 @@
+install.packages("corrplot")
+install.packages("RColorBrewer")
+
+library(corrplot)
+library(RColorBrewer)
+
+data(ToothGrowth)
+View(ToothGrowth)
+
+tg_numeric <- ToothGrowth[, c("len", "dose")]
+cor_matrix <- cor(tg_numeric)
+cor_matrix
+
+corrplot(cor_matrix,
+         method = "color",
+         col = brewer.pal(n = 8, name = "Set2"),
+         addCoef.col = "black",
+         tl.col = "black",
+         number.cex = 1.2)
+
+#The correlation analysis shows a positive relationship between tooth length and dose.
+#This indicates that as the dose increase, the tooth length also increase.
+#The correlation value is moderately strong, suggesting dose is an important factor to influencing tooth growth.
