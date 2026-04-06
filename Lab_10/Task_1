@@ -1,0 +1,26 @@
+library(ggplot2)
+
+data(Theoph)
+View(Theoph)
+
+model <- lm(Dose ~ Wt, data = Theoph)
+summary(model)
+
+ggplot(Theoph, aes(x = Wt, y = Dose)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "red") +
+  labs(
+    title = "Linear Regression: Weight vs Dose",
+    x = "Weight (kg)",
+    y = "Dose (mg/kg)"
+  )
+
+new_data <- data.frame(Wt = c(90, 95, 100))
+predicted_dose <- predict(model, new_data)
+predicted_dose
+
+#A Linear Regression model is created to analyze the relationship between weight and dose.
+#The results show a negative relationship, as the weight increases, the dose reduces.
+#This suggests that dosage is adjusted based on body weight rather than increasing proportionally.
+#The R-squared value suggests that the model explains a significant portion of the variation in the data.
+#The p-value for weight is very small, indicating weight is a significant predictor to dose.
