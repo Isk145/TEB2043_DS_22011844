@@ -1,0 +1,24 @@
+install.packages("ggplot2")
+install.packages("caret")
+
+library(ggplot2)
+library(caret)
+
+data(mtcars)
+View(mtcars)
+
+mtcars_log <- log(mtcars)
+head(mtcars_log)
+
+mtcars_scaled <- scale(mtcars)
+head(mtcars_scaled)
+
+min_max <- function(x) {
+  (x - min(x)) / (max(x) - min(x))
+}
+mtcars_minmax <- as.data.frame(lapply(mtcars, min_max))
+head(mtcars_minmax)
+
+#Log transformation reduce skewness and can handle large variations in the dataset.
+#Standard scaling standardizes the dataset around a mean of 0 and is useful for machine learning models.
+#min-max scaling transforms the data into a fixed range, making it easier to compare values between variables.
