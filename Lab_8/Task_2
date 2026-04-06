@@ -1,0 +1,20 @@
+library(plotrix)
+data(mtcars)
+View(mtcars)
+
+hist(mtcars$mpg,
+     main = "Distribution of Car Fuel Efficiency (MPG)",
+     xlab = "Miles Per Gallon",
+     col = "lightblue",
+     border = "black")
+
+plot(mtcars$wt, mtcars$mpg,
+     main = "Car Weight vs Fuel Efficiency",
+     xlab = "Weight",
+     ylab = "Miles Per Gallon",
+     col = "blue",
+     pch = 19)
+
+#Based on the analysis of the mtcars dataset, it is found that most cars have a moderate fuel efficiency.
+#However, there is a negative relationship between car weight and fuel efficiency. Heavier cars tend to consume more fuel, resulting in lower mpg.
+#This suggests that reducing vehicle weight can improve fuel efficiency which is important for cost savings and environmental impact.
